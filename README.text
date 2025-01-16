@@ -14,7 +14,7 @@ You can view the live demo of this project here:
 - **Search**: Search for products by name.
 - **Favorites**: Add products to your favorites, which are stored in local storage.
 - **Responsive Design**: The app is fully responsive across multiple devices using Tailwind CSS.
-- **Modal**: Clicking on a product opens a ne wpage displaying detailed information.
+- **Modal**: Clicking on a product opens a modal displaying detailed information.
 
 ## Setup and Installation
 
