@@ -6,6 +6,8 @@ import { BsCartCheckFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Skeleton from "react-loading-skeleton"; // Import the Skeleton component
+import "react-loading-skeleton/dist/skeleton.css"; // Import Skeleton CSS
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -41,10 +43,26 @@ const ProductDetails = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="animate-pulse">
-                    <div className="w-72 h-72 bg-gray-300 rounded-lg mb-4"></div>
-                    <div className="h-6 w-48 bg-gray-300 rounded-md"></div>
+            <div className="flex items-center justify-center h-screen">
+                <div className="flex flex-col w-full max-w-5xl gap-12 mx-auto md:flex-row">
+                    {/* Skeleton for Image */}
+                    <div className="flex-1">
+                        <Skeleton height={400} />
+                    </div>
+
+                    <div className="flex flex-col flex-1 space-y-4">
+                        {/* Skeleton for Title */}
+                        <Skeleton height={40} width="80%" />
+
+                        {/* Skeleton for Rating */}
+                        <Skeleton height={30} width="50%" />
+
+                        {/* Skeleton for Price */}
+                        <Skeleton height={30} width="30%" />
+
+                        {/* Skeleton for Description */}
+                        <Skeleton count={4} height={20} />
+                    </div>
                 </div>
             </div>
         );
@@ -55,27 +73,27 @@ const ProductDetails = () => {
     return (
         <>
             <Navbar />
-            <div className="mx-auto px-4 py-12 bg-gradient-to-r">
-                <div className="flex flex-col md:flex-row gap-12">
+            <div className="px-4 py-12 mx-auto bg-gradient-to-r">
+                <div className="flex flex-col gap-12 md:flex-row">
                     <motion.div
                         className="flex-1"
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <div className="relative bg-white rounded-xl shadow-xl p-6">
+                        <div className="relative p-6 bg-white shadow-xl rounded-xl">
                             <img
                                 src={product.image}
                                 alt={product.title}
-                                className="w-full h-96 object-contain rounded-lg"
+                                className="object-contain w-full rounded-lg h-96"
                             />
-                            <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                            <div className="absolute px-3 py-1 text-xs font-semibold text-white bg-red-500 rounded-full top-4 left-4">
                                 20% OFF
                             </div>
                         </div>
                     </motion.div>
 
-                    <div className="flex-1 flex flex-col">
+                    <div className="flex flex-col flex-1">
                         <motion.h1
                             className="text-4xl font-extrabold text-gray-800"
                             initial={{ y: 50, opacity: 0 }}
@@ -93,7 +111,7 @@ const ProductDetails = () => {
                                 readOnly
                                 className="text-yellow-400"
                             />
-                            <span className="ml-2 text-gray-500 text-sm">
+                            <span className="ml-2 text-sm text-gray-500">
                                 ({product.rating.count} reviews)
                             </span>
                         </div>
@@ -102,12 +120,12 @@ const ProductDetails = () => {
                             <span className="text-3xl font-bold text-[#C13515]">
                                 ${discountedPrice.toFixed(2)}
                             </span>
-                            <span className="text-gray-500 text-lg line-through ml-4">
+                            <span className="ml-4 text-lg text-gray-500 line-through">
                                 ${product.price.toFixed(2)}
                             </span>
                         </div>
 
-                        <p className="mt-8 text-gray-600 leading-relaxed">
+                        <p className="mt-8 leading-relaxed text-gray-600">
                             {product.description}
                         </p>
 
@@ -124,7 +142,7 @@ const ProductDetails = () => {
 
                             <motion.button
                                 onClick={handleBuyNow}
-                                className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg shadow-md hover:from-green-600 hover:to-green-700 transition transform hover:scale-105"
+                                className="flex items-center gap-2 px-8 py-3 text-white transition transform rounded-lg shadow-md bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 hover:scale-105"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
