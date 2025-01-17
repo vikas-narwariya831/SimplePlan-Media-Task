@@ -105,17 +105,17 @@ const Products = () => {
     return (
         <>
             <Navbar />
-            <div className="container mx-auto px-4">
-                <div className="text-center mb-8">
+            <div className="container px-4 mx-auto">
+                <div className="mb-8 text-center">
                     <h1 className="text-3xl font-bold text-gray-800">Our Products</h1>
-                    <p className="text-gray-500 mt-2">Find the best products curated just for you</p>
+                    <p className="mt-2 text-gray-500">Find the best products curated just for you</p>
                 </div>
 
                 <div className="flex justify-between gap-6 mb-6">
                     <select
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="p-3 border rounded-lg shadow-sm w-1/2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-1/2 p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
                         <option value="">All Categories</option>
                         {categories.map((category) => (
@@ -128,20 +128,20 @@ const Products = () => {
                     <select
                         value={sortOrder}
                         onChange={(e) => setSortOrder(e.target.value)}
-                        className="p-3 border rounded-lg shadow-sm w-1/2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-1/2 p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     >
                         <option value="">Sort</option>
 
-                        <option value="desc">Price: High to Low</option>
-                        <option value="asc">Price: Low to High</option>
+                        <option value="asc" >Price: High to Low</option>
+                        <option value="desc" >Price: Low to High</option>
                     </select>
                 </div>
 
                 {loading ? (
-                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {/* Skeleton Loader for Products */}
                         {Array(6).fill(0).map((_, index) => (
-                            <motion.div key={index} whileHover={{ scale: 1.05 }} className="bg-white rounded-lg shadow-md overflow-hidden">
+                            <motion.div key={index} whileHover={{ scale: 1.05 }} className="overflow-hidden bg-white rounded-lg shadow-md">
                                 <Skeleton height={200} width="100%" />
                                 <div className="p-4">
                                     <Skeleton height={20} width="70%" />
@@ -152,36 +152,36 @@ const Products = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {products.map((product) => (
                             <motion.div
                                 key={product.id}
                                 whileHover={{ scale: 1.05 }}
-                                className="bg-white rounded-lg shadow-md overflow-hidden relative" // Add relative positioning
+                                className="relative overflow-hidden bg-white rounded-lg shadow-md" // Add relative positioning
                             >
                                 <Link to={`/product-details/${product.id}`}>
                                     <img
                                         src={product.image}
                                         alt={product.title}
-                                        className="h-56 w-full object-contain p-4"
+                                        className="object-contain w-full h-56 p-4"
                                     />
                                 </Link>
                                 <button
                                     onClick={() => toggleWishlist(product.id)}
-                                    className="absolute top-2 right-2 text-red-500 text-xl"
+                                    className="absolute text-xl text-red-500 top-2 right-2"
                                 >
                                     {wishlistStatus[product.id] ? <MdFavorite /> : <MdFavoriteBorder />}
                                 </button>
                                 <div className="p-4">
-                                    <h2 className="font-semibold text-gray-800 text-lg line-clamp-1">{product.title}</h2>
+                                    <h2 className="text-lg font-semibold text-gray-800 line-clamp-1">{product.title}</h2>
                                     <div className="flex items-center mt-2">
                                         {renderStars(product.rating.rate)}
                                     </div>
-                                    <p className="text-gray-500 text-sm mt-2">
+                                    <p className="mt-2 text-sm text-gray-500">
                                         ${product.price.toFixed(2)}
                                     </p>
-                                    <div className="mt-4 flex justify-between items-center">
-                                        <button className="bg-indigo-500 text-white py-2 px-4 rounded-lg hover:bg-indigo-600 w-full">
+                                    <div className="flex items-center justify-between mt-4">
+                                        <button className="w-full px-4 py-2 text-white bg-indigo-500 rounded-lg hover:bg-indigo-600">
                                             Add to Cart
                                         </button>
                                     </div>
